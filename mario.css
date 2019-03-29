@@ -1,0 +1,35 @@
+
+
+.root{
+    position: relative;
+
+}
+#moves{
+    position: relative;
+    margin: 0 auto;
+    height: 50px;
+    
+}
+.mario_contaier{
+    position: relative;
+    margin: 0 auto;
+    left: 300px;
+    border: 1px solid;
+    display:inline-block;
+}
+
+.mario_row{
+    position: relative;
+    width: auto;
+}
+
+.mario_col{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    border: 1px solid;
+    background-color: cadetblue;
+    text-align: center;
+}
+

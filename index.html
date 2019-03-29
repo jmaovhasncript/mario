@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./mario.css"/>
+</head>
+<body>
+     <div class="root">
+        <div id="moves">
+            0
+        </div>
+     </div>
+
+
+        <script>
+            (function(W){
+                W.marioGame  =  (function(){
+
+                    var state = {
+
+                    },dependencies = ["view","model"],index,row=5,col=5;
+                    
+                    var registerForEvent = function(){
+                        document.addEventListener('revieveKey',handleKeyEvent);
+                    }
+
+                    var handleKeyEvent = function(event){
+                        var model = state["model"],view =state["view"];
+                        console.log(event);
+                        var currentMarioPoint = model.getMarioPoint();
+                        switch (event.detail){
+                            case "right":
+                                view.clearMario(currentMarioPoint.row,currentMarioPoint.col);
+                                currentMarioPoint.col = moveRight(currentMarioPoint.col);
+                                model.moveMarioPoint(currentMarioPoint.row,currentMarioPoint.col);
+                                view.placeMario(currentMarioPoint.row,currentMarioPoint.col)
+                                break;
+                            case "left":
+                                break;
+                            case "up":
+                                break;
+                            case "down":
+                                 break;
+                        }
+                    }
+
+                    var moveRight = function(val){
+                        var marCol = val;
+                        if(marCol < col){
+                            marCol++;
+                        }
+                        return marCol;
+
+                    };
+
+                    var moveLeft = function(){
+
+                    };
+
+                    var moveUp = function(){
+
+                    };
+
+                    var moveDown = function(){
+
+                    }
+
+                    var registerObjTostate = function(type,obj){
+                        state[type]= obj;
+                        index = dependencies.indexOf(type);
+                        if (index !== -1) {
+                            dependencies.splice(index, 1);
+                        }
+                        if(dependencies.length ==0){
+                            state["model"].createDimansionalArray(row,col);
+                            createMashroom();
+                            registerForEvent();
+                        }
+                    }
+                    var createMashroom = function(){
+                        var model = state["model"],view =state["view"];
+                        for(var i=0;i<row ;i++){
+                            model.fillCell(dynamicDynamicVal(row),dynamicDynamicVal(col));
+                        }
+                        console.log(model.getDataArray());
+                        view.createTable(model.getDataArray(),row,col);
+                        model.moveMarioPoint(0,0);
+                        view.placeMario(0,0);
+                    }
+                    var dynamicDynamicVal = function(val){
+                        return Math.floor(Math.random() * val-1) + 1
+                    }
+
+                    return {
+                        registerObjTostate : registerObjTostate
+                        
+                    }
+                    
+                }())
+
+
+            }(window))
+        
+        </script>
+        <script src="Model.js"></script>
+        <script src="view.js"></script>
+        
+</body>
+</html>
